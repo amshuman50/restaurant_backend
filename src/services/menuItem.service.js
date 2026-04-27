@@ -6,7 +6,8 @@ const getAllMenuItems = async () => {
 };
 
 const getMenuItemById = async (id) => {
-    const MenuItem = await MenuItem.findById(id)
+    const EachItem = await MenuItem.findById(id)
+    return EachItem;
 };
 
 const createMenuItem = async (data) => {
@@ -21,4 +22,4 @@ const deleteMenuItem = async (id) => {
     return await MenuItem.findByIdAndDelete(id);
 };
 
-export default { getAllMenuItems, getAllMenuItems, createMenuItem, updateMenuItem, deleteMenuItem };
+export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem };
