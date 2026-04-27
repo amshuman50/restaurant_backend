@@ -1,12 +1,22 @@
 import express from "express";
+import config from "./config/config.js";
+import menuItemRoute from "./routes/menuItem.route.js"
+import connectDB from "./config/database.js";
 
-const app=express();
-const PORT=8000;
+const app = express();
+connectDB();
+app.use(express.json());
 
-app.get("/",(req,res)=>{
+app.get("/", (req, res) => {
     res.send("Home Page.")
 })
 
-app.listen(PORT,()=>{
-    console.log(`Server running at port ${PORT}`)
+app.get("/about", (req, res) => {
+    res.send("About Page.")
+})
+
+app.use("/api/menuItem", menuItemRoute)
+
+app.listen(config.port, () => {
+    console.log(`Server running at port ${config.port}`);
 })
