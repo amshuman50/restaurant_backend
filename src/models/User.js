@@ -12,7 +12,7 @@ const UserSchema = new mongoose.Schema({
         required: [true, "Phone number is required."],
         minLength: 6,
         maxLength: 13,
-        unique: true
+        unique: [true, "Phone number already exists."]
     },
     address: {
         country: {
@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "Email is required."],
         lowercase: true,
-        unique: true,
+        unique: [true, "Email already exists."],
         validate: {
             validator: (value) => {
                 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
