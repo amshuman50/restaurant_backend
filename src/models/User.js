@@ -1,6 +1,6 @@
-import mongoose, { Mongoose } from "mongoose";
+import mongoose from "mongoose";
 
-const UserSchema = new Mongoose.UserSchema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: [true, "Name is Required."],
@@ -38,7 +38,7 @@ const UserSchema = new Mongoose.UserSchema({
         }
     },
     password: {
-        tyoe: String,
+        type: String,
         required: [true, "Password is required"],
         minLength: [6, "Password length must be greater than 6."]
     },
@@ -47,12 +47,21 @@ const UserSchema = new Mongoose.UserSchema({
         default: true
     },
     createdAt: {
-        tyoe: Date,
+        type: Date,
         default: Date.now()
     },
-    roles: {
+    role: {
         type: [String],
         enum: ["SUPER_ADMIN", "ADMIN", "STAFF", "CUSTOMER"],
-        Default: ["CUSTOMER"]
+        default: ["CUSTOMER"]
     }
+    // role: {
+    //     type: [{
+    //         type: String,
+    //         enum: ["SUPER_ADMIN", "ADMIN", "STAFF", "CUSTOMER"]
+    //     }],
+    //     default: ["CUSTOMER"]
+    // }
 })
+
+export default mongoose.model("UserSchema", UserSchema);
