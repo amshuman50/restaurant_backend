@@ -22,4 +22,26 @@ const register = async (data) => {
     });
 };
 
-export default {register}
+const login = async (data) => {
+    const user = await User.findOne({
+        $or: [{ email: data?.email }, { phone: data?.phone }]
+    });
+    if (!user) {
+        throw {
+            status: 400,
+            message: "User not found."
+        };
+    }
+
+    const isPasswordMatch = bcrypt.compareSync(data.password, user.password);
+    if (!isPasswordMatch) {
+        throw {
+            status: 400,
+            message: "Password do not match."
+        }
+    }
+
+    return user;
+}
+
+export default { register, login };
