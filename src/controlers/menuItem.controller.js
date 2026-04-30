@@ -1,6 +1,12 @@
 import menuItemService from "../services/menuItem.service.js";
 
 const getAllMenuItems = async (req, res) => {
+
+    //Retrieving cookie from browser and displaying it in colsole.log()
+    /*const cookie = req.headers.cookie;
+    const token = cookie.split("=")[1];
+    console.log(token);*/
+
     const menuItems = await menuItemService.getAllMenuItems();
     res.json(menuItems);
 };
