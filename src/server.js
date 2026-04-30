@@ -5,6 +5,7 @@ import userRoute from "./routes/user.route.js"
 import authRoute from "./routes/auth.route.js"
 import connectDB from "./config/database.js";
 import logger from "./middlewares/logger.js";
+import auth from "./middlewares/auth.js";
 
 const app = express();
 connectDB();
@@ -20,7 +21,7 @@ app.get("/about", (req, res) => {
 })
 
 app.use("/api/menuItem", menuItemRoute);
-app.use("/api/user", userRoute);
+app.use("/api/user", auth, userRoute);
 app.use("/api/auth", authRoute)
 
 app.listen(config.port, () => {
