@@ -19,8 +19,9 @@ const getMenuItemById = async (req, res) => {
 };
 
 const createMenuItem = async (req, res) => {
+    const userId=req.user._id;
     try {
-        const menuItem = await menuItemService.createMenuItem(req.body);
+        const menuItem = await menuItemService.createMenuItem(req.body, userId);
         res.json(menuItem);
     } catch (error) {
         res.status(400).send(error.message);
