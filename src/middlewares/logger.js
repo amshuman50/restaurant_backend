@@ -4,3 +4,5 @@ const logger=(req,res,next)=>{
     console.log(`${method}: ${url}`);
     next();
 };
+
+export default logger;
