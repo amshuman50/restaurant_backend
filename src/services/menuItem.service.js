@@ -10,8 +10,8 @@ const getMenuItemById = async (id) => {
     return EachItem;
 };
 
-const createMenuItem = async (data) => {
-    return await MenuItem.create(data);
+const createMenuItem = async (data, userId) => {
+    return await MenuItem.create({ ...data, createdBy: userId });
 };
 
 const updateMenuItem = async (id, input) => {

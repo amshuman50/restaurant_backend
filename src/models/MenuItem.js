@@ -37,6 +37,11 @@ const MenuItemSchema = new mongoose.Schema({
     isAvailable: {
         type: Boolean,
         default: true
+    },
+    createdBy: {
+        type: mongoose.Schema.ObjectId,
+        ref: "User",
+        required: [true, "Created by user id is required."]
     }
 });
 
