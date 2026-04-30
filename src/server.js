@@ -4,10 +4,12 @@ import menuItemRoute from "./routes/menuItem.route.js"
 import userRoute from "./routes/user.route.js"
 import authRoute from "./routes/auth.route.js"
 import connectDB from "./config/database.js";
+import logger from "./middlewares/logger.js";
 
 const app = express();
 connectDB();
 app.use(express.json());
+app.use(logger)
 
 app.get("/", (req, res) => {
     res.send("Home Page.")
