@@ -8,7 +8,7 @@ const UserSchema = new mongoose.Schema({
         maxLength: 50
     },
     phone: {
-        type: Number,
+        type: String,
         required: [true, "Phone number is required."],
         minLength: 6,
         maxLength: 13,
