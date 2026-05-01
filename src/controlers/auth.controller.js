@@ -5,11 +5,6 @@ import jwt from "../utils/jwt.js"
 const register = async (req, res) => {
     const input = req.body;
     try {
-        if (!input) {
-            throw {
-                message: "Invalid Data."
-            };
-        }
         const user = await authService.register(input);
         const token = jwt.createToken(user);
         res.cookie("authToken", token, {
@@ -24,14 +19,8 @@ const register = async (req, res) => {
 const login = async (req, res) => {
     const input = req.body;
     try {
-        if (!input) {
-            throw {
-                message: "Invalid Data"
-            }
-        }
         const user = await authService.login(input);
         const token = jwt.createToken(user);
-
         res.cookie("authToken", token, {
             maxAge: 86400 * 1000
         })
