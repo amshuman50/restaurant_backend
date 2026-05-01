@@ -1,3 +1,4 @@
 export const ROLE_ADMIN="ADMIN";
 export const ROLE_CUSTOMER="CUSTOMER";
 export const ROLE_STAFF="STAFF";
+export const ROLE_SUPERADMIN="SUPER_ADMIN";
