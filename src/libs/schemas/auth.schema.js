@@ -5,7 +5,7 @@ import { userSchema } from "./user.schema.js";
 export const loginSchema = z
     .object({
         email: z
-            .string({ error: "Email is Required." })
+            .string({ error: "Email must be string." })
             .regex(emailRegex, { error: "Invalid email address." })
             .optional(),
         phone: z.string({ error: "Phone number is required." }).optional(),
