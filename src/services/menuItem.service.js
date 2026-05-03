@@ -7,13 +7,15 @@ const getAllMenuItems = async (query) => {
     const offset = query.offset ?? 0;
 
     const filters = {};
-    const { name, category, veg, isAvailable, createdBy } = query;
+    const { name, category, veg, isAvailable, createdBy, variantName } = query;
 
     if (name) filters.name = { $regex: name, $options: "i" };
     if (category) filters.category = category;
     if (createdBy) filters.createdBy = createdBy;
     if (veg !== undefined) filters.veg = veg === "true";
     if (isAvailable !== undefined) filters.isAvailable = isAvailable === "true";
+
+    if (variantName) filters["variants.name"] = { $regex: variantName, $options: "i" };
 
     const MenuItems = await MenuItem.find(filters).sort(sort).limit(limit).skip(offset)
 
