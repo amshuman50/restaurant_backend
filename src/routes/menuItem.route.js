@@ -9,9 +9,16 @@ import { menuItemSchema } from "../libs/schemas/menuItem.schema.js";
 const router = express.Router();
 
 router.get("/", menuItemController.getAllMenuItems);
+router.get("/category", menuItemController.getCategory);
+// router.get("/veg",menuItemController.getVeg);
+// router.get("/available",menuItemController.getAvailable);
+router.get("/count", menuItemController.getTotalCount);
+
 router.get("/:id", menuItemController.getMenuItemById);
 router.post("/", auth, roleBasedAuth(ROLE_ADMIN), validate(menuItemSchema), menuItemController.createMenuItem);
 router.put("/:id", auth, roleBasedAuth(ROLE_ADMIN), menuItemController.updateMenuItem);
 router.delete("/:id", auth, roleBasedAuth(ROLE_ADMIN), menuItemController.deleteMenuItem);
+
+
 
 export default router;
