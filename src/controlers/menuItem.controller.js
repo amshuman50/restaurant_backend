@@ -7,7 +7,7 @@ const getAllMenuItems = async (req, res) => {
     const token = cookie.split("=")[1];
     console.log(token);*/
 
-    const menuItems = await menuItemService.getAllMenuItems();
+    const menuItems = await menuItemService.getAllMenuItems(req.query);
     res.json(menuItems);
 };
 
@@ -19,7 +19,7 @@ const getMenuItemById = async (req, res) => {
 };
 
 const createMenuItem = async (req, res) => {
-    const userId=req.user._id;
+    const userId = req.user._id;
     try {
         const menuItem = await menuItemService.createMenuItem(req.body, userId);
         res.json(menuItem);
@@ -47,6 +47,27 @@ const deleteMenuItem = async (req, res) => {
     } catch (error) {
         res.status(400).send(error.message);
     }
+};
+
+const getCategory = async (req, res) => {
+    const category = await menuItemService.getCategory();
+    res.json(category);
 }
 
-export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem }
+// const getVeg = async (req, res) => {
+//     const veg = await menuItemService.getVeg();
+//     res.json(veg);
+// };
+
+// const getAvailable = async (req, res) => {
+//     const available = await menuItemService.getAvailable();
+//     res.json(available);
+// };
+
+const getTotalCount = async (req, res) => {
+    const count = await menuItemService.getTotalCount();
+    res.json(count);
+};
+
+// export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem, getCategory, getTotalCount, getVeg, getAvailable }
+export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem, getCategory, getTotalCount }

@@ -1,7 +1,22 @@
 import MenuItem from "../models/MenuItem.js";
 
-const getAllMenuItems = async () => {
-    const MenuItems = await MenuItem.find();
+const getAllMenuItems = async (query) => {
+    // const MenuItems = await MenuItem.find();
+    const sort = query.sort ? JSON.parse(query.sort) : {};
+    const limit = query.limit ?? 10;
+    const offset = query.offset ?? 0;
+
+    const filters = {};
+    const { name, category, veg, isAvailable, createdBy } = query;
+
+    if (name) filters.name = { $regex: name, $options: "i" };
+    if (category) filters.category = category;
+    if (createdBy) filters.createdBy = createdBy;
+    if (veg !== undefined) filters.veg = veg === "true";
+    if (isAvailable !== undefined) filters.isAvailable = isAvailable === "true";
+
+    const MenuItems = await MenuItem.find(filters).sort(sort).limit(limit).skip(offset)
+
     return MenuItems;
 };
 
@@ -22,4 +37,21 @@ const deleteMenuItem = async (id) => {
     return await MenuItem.findByIdAndDelete(id);
 };
 
-export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem };
+const getCategory = async () => {
+    return await MenuItem.distinct("category");
+};
+
+// const getVeg = async () => {
+//     return await MenuItem.distinct("veg");
+// };
+
+// const getAvailable = async () => {
+//     return await MenuItem.distinct("isAvailable");
+// }
+
+const getTotalCount = async () => {
+    return await MenuItem.countDocuments();
+}
+
+// export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem, getCategory, getTotalCount, getVeg, getAvailable };
+export default { getAllMenuItems, getMenuItemById, createMenuItem, updateMenuItem, deleteMenuItem, getCategory, getTotalCount };
