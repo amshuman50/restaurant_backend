@@ -1,4 +1,5 @@
 import MenuItem from "../models/MenuItem.js";
+import uploadFile from "../utils/fileUploader.js";
 
 const getAllMenuItems = async (query) => {
     // const MenuItems = await MenuItem.find();
@@ -27,8 +28,13 @@ const getMenuItemById = async (id) => {
     return EachItem;
 };
 
-const createMenuItem = async (data, userId) => {
-    return await MenuItem.create({ ...data, createdBy: userId });
+const createMenuItem = async (data, files, userId) => {
+    const uploadFiles = await uploadFile(files)
+    return await MenuItem.create({
+        ...data,
+        imageUrls: uploadFiles.map((file) => file.url),
+        createdBy: userId
+    });
 };
 
 const updateMenuItem = async (id, input) => {

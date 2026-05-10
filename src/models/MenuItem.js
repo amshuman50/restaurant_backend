@@ -42,6 +42,9 @@ const MenuItemSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User",
         required: [true, "Created by user id is required."]
+    },
+    imageUrls: {
+        type: [String]
     }
 });
 
