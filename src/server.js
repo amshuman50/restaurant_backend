@@ -6,11 +6,13 @@ import authRoute from "./routes/auth.route.js"
 import connectDB from "./config/database.js";
 import logger from "./middlewares/logger.js";
 import auth from "./middlewares/auth.js";
+import cors from "cors";
 
 const app = express();
 connectDB();
 app.use(express.json());
-app.use(logger)
+app.use(logger);
+app.use(cors());
 
 app.get("/", (req, res) => {
     res.send("Home Page.")
