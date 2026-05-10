@@ -37,8 +37,13 @@ const createMenuItem = async (data, files, userId) => {
     });
 };
 
-const updateMenuItem = async (id, input) => {
-    return await MenuItem.findByIdAndUpdate(id, input, { new: true });
+const updateMenuItem = async (id, input, files) => {
+    const updateData = input;
+    if (files && files.length > 0) {
+        const uploadedFiles = await uploadFile(files);
+        updateData.imageUrls = uploadedFiles.map((file) => file.url);
+    }
+    return await MenuItem.findByIdAndUpdate(id, updateData, { new: true });
 };
 
 const deleteMenuItem = async (id) => {

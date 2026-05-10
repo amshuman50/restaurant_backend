@@ -21,7 +21,7 @@ const getMenuItemById = async (req, res) => {
 const createMenuItem = async (req, res) => {
     const userId = req.user._id;
     try {
-        const menuItem = await menuItemService.createMenuItem(req.body,req.files, userId);
+        const menuItem = await menuItemService.createMenuItem(req.body, req.files, userId);
         res.json(menuItem);
     } catch (error) {
         res.status(400).send(error.message);
@@ -32,7 +32,7 @@ const updateMenuItem = async (req, res) => {
     const id = req.params.id;
     const input = req.body;
     try {
-        const menuItem = await menuItemService.updateMenuItem(id, input);
+        const menuItem = await menuItemService.updateMenuItem(id, input, req.files);
         res.json(menuItem);
     } catch (error) {
         res.status(400).send(error.message);

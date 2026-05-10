@@ -50,6 +50,7 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    profileImageUrl: String,
     role: {
         type: [String],
         enum: ["SUPER_ADMIN", "ADMIN", "STAFF", "CUSTOMER"],

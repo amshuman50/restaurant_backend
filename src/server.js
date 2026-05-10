@@ -21,7 +21,11 @@ app.use(logger);
 app.use(cors());
 
 app.get("/", (req, res) => {
-    res.send("Home Page.")
+    res.json({
+        status: "ok",
+        version: "0.1.0",
+        port: config.port
+    })
 })
 
 app.get("/about", (req, res) => {
@@ -29,7 +33,7 @@ app.get("/about", (req, res) => {
 })
 
 app.use("/api/menuItem", upload.array("images", 5), menuItemRoute);
-app.use("/api/user", auth, userRoute);
+app.use("/api/user", upload.single("image"), auth, userRoute);
 app.use("/api/auth", authRoute)
 
 app.listen(config.port, () => {
