@@ -8,7 +8,7 @@ async function uploadFile(files) {
             cloudinary.uploader
                 .upload_stream(
                     {
-                        folder: "20260320",
+                        folder: "Restaurant",
                         allowed_formats: ["jpg", "png", "webp"],
                     },
                     (error, data) => {
